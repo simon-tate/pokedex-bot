@@ -1,10 +1,10 @@
-# Node.js template
+# Pokédex Chatbot (Node + Express + PokéAPI)
 
-This is a Node.js project.
+A tiny API + web UI that answers Pokémon questions (types, weaknesses, evolutions, stats, moves).  
+Live data powered by the public PokéAPI.
 
-Add your [configuration](https://codesandbox.io/docs/projects/learn/setting-up/tasks) to optimize it for [CodeSandbox](https://codesandbox.io/p/dashboard).
-
-## Resources
-
-- [CodeSandbox — Docs](https://codesandbox.io/docs/learn)
-- [CodeSandbox — Discord](https://discord.gg/Ggarp3pX5H)
+## Run locally
+```bash
+npm install
+npm start
+# open the printed URL (CodeSandbox/Node picks a free port)
