@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chatbot Lab — Your Name</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Top nav -->
+    <header>
+      <nav class="nav" aria-label="Main">
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true"></div>
+          Chatbot Lab
+        </div>
+        <div class="nav-links">
+          <a href="#sources">Knowledge</a>
+          <a href="#playground">Playground</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact" class="btn secondary">Contact</a>
+          <a href="#get-started" class="btn">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- HERO -->
+      <section class="hero" id="get-started" aria-label="Intro">
+        <div>
+          <span class="badge" aria-label="Beta label">Beta • Personal AI</span>
+          <h1>Build, teach, and test your own chatbot.</h1>
+          <p class="lead">
+            This site will be your training ground: add knowledge sources,
+            inspect what the bot knows, and chat with it in the
+            <strong>Playground</strong>.
+          </p>
+          <div class="inline" style="margin-top: 10px">
+            <a class="btn" href="#sources">Add Knowledge</a>
+            <a class="btn secondary" href="#playground">Open Playground</a>
+          </div>
+          <p class="muted" style="margin-top: 8px">
+            Tip: press <span class="kbd">⌘</span><span class="kbd">S</span> in
+            CodeSandbox to save changes.
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-label="Next steps card">
+          <div class="grid">
+            <div class="inline">
+              <span class="chip">1</span><strong>Create pages</strong>
+            </div>
+            <div class="muted">
+              Edit this file; add <span class="kbd">style.css</span> /
+              <span class="kbd">script.js</span> later.
+            </div>
+
+            <div class="inline">
+              <span class="chip">2</span><strong>Add knowledge</strong>
+            </div>
+            <div class="muted">
+              Paste text, upload docs, or link URLs you’ll train on.
+            </div>
+
+            <div class="inline">
+              <span class="chip">3</span><strong>Test the bot</strong>
+            </div>
+            <div class="muted">
+              Use the playground to try questions and refine sources.
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="section" aria-label="Highlights">
+        <div class="grid cards">
+          <article class="card">
+            <h3>Clean separation</h3>
+            <p class="muted">
+              HTML for structure, CSS for looks, JS for behavior. Easy to scale.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Training-friendly</h3>
+            <p class="muted">
+              Dedicated “Knowledge Sources” & “Playground” sections for future
+              fine-tuning / RAG.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Accessible</h3>
+            <p class="muted">
+              Landmarks, labels, and good color contrast baked in.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Deployable</h3>
+            <p class="muted">
+              Static-friendly; can ship to Netlify, Vercel, GitHub Pages later.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- KNOWLEDGE SOURCES -->
+      <section class="section" id="sources" aria-label="Knowledge Sources">
+        <h2>Knowledge Sources</h2>
+        <p class="muted">
+          Add the materials your bot should learn from. (Later, we’ll wire these
+          to storage + embeddings.)
+        </p>
+
+        <div class="split" style="margin-top: 10px">
+          <form
+            class="card"
+            aria-label="Add text source"
+            onsubmit="return false"
+          >
+            <h3>Paste text</h3>
+            <label for="textSource">Content</label>
+            <textarea
+              id="textSource"
+              placeholder="Paste an article, FAQ, or notes here…"
+            ></textarea>
+            <div class="inline" style="margin-top: 10px">
+              <button class="btn" id="saveText">Save Source</button>
+              <span class="muted">Saved locally for now.</span>
+            </div>
+          </form>
+
+          <form class="card" aria-label="Upload file" onsubmit="return false">
+            <h3>Upload file</h3>
+            <label for="fileInput">PDF / TXT (placeholder)</label>
+            <input id="fileInput" type="file" />
+            <div class="inline" style="margin-top: 10px">
+              <button class="btn secondary" id="ingestFile">Ingest</button>
+              <span class="muted">We’ll wire this to real parsing later.</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card" style="margin-top: 12px">
+          <h3>Saved sources</h3>
+          <p class="muted">
+            Examples: product docs, policies, blog posts, customer FAQs.
+          </p>
+          <ul
+            id="sourceList"
+            class="muted"
+            style="margin: 0; padding-left: 18px"
+          ></ul>
+        </div>
+      </section>
+
+      <!-- PLAYGROUND -->
+      <section class="section" id="playground" aria-label="Chat Playground">
+        <h2>Playground</h2>
+        <p class="muted">
+          Try questions and see how the bot might respond. (Static demo for
+          now.)
+        </p>
+
+        <div class="card">
+          <div class="chat" role="log" aria-live="polite" id="chatLog">
+            <div class="msg">
+              <div class="ai-bubble">
+                Hi! Ask me about anything I’ve been trained on. Try: “Summarize
+                the onboarding guide.”
+              </div>
+            </div>
+            <div class="msg">
+              <div class="you-bubble">What sources do you currently have?</div>
+            </div>
+            <div class="msg">
+              <div class="ai-bubble">
+                I’ll use any text you paste or files you upload in “Knowledge
+                Sources.” (Coming soon: URLs and PDFs.)
+              </div>
+            </div>
+          </div>
+
+          <div class="chatbar">
+            <input
+              type="text"
+              id="chatInput"
+              placeholder="Type a message…"
+              aria-label="Chat input"
+            />
+            <button class="btn" id="sendBtn">Send</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq" aria-label="FAQ">
+        <h2>FAQ</h2>
+        <div class="grid cards">
+          <article class="card">
+            <h3>How will I “teach” the bot?</h3>
+            <p class="muted">
+              We’ll add a script to chunk sources, create embeddings, and query
+              them (RAG). For now, the UI is ready.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Do I need a backend?</h3>
+            <p class="muted">
+              Eventually yes (for secure keys, storage, model calls). But you
+              can prototype the UI fully in the browser.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Which model?</h3>
+            <p class="muted">
+              We can start with a hosted API later. This page is
+              provider-agnostic.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact" aria-label="Contact">
+        <h2>Contact</h2>
+        <div class="card">
+          <p class="muted">
+            Add a real form later; for now this is a placeholder.
+          </p>
+          <div class="inline">
+            <span class="chip">Email: you@example.com</span>
+            <span class="chip">GitHub: @yourhandle</span>
+            <span class="chip">Location: Denver, CO</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot">
+        <span>© <span id="year"></span> Chatbot Lab — Built by You</span>
+        <span>Design-first • Data-ready • Accessible</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
